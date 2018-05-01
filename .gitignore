@@ -1,0 +1,9 @@
+.vagrant
+.librarian
+VagrantBK
+.tmp/
+.ruby-gemset
+.ruby-version
+
+www/*
+!www/README.md
