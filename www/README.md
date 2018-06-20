@@ -5,5 +5,4 @@ This is the directory where you files will be synced between the guest and the
 host. However, the ``.gitignore`` file, will tell Git to ignore everything but
 this README.md file.
 
-This is the default ROOT DOCUMENT folder for Ningx. Please ignore the `html`
-subfolder, since its a nginx default on instalation.
+This is the default ROOT DOCUMENT folder for Ningx.
