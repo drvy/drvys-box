@@ -1,19 +1,24 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure('2') do |config|
+Vagrant.configure("2") do |config|
+
+    # ( Drvy's Vagrant Box                    )
+    # ( A Vagrant Machine for Web Development )
+    #  ---------------------------------------
+    #   o
+    #    o   \
+    #         \ /\
+    #         ( )
+    #       .( o ).
 
     config.vm.box = 'ubuntu/xenial64'
-    config.vm.hostname = 'drvysbox'
-
     config.vm.network 'private_network', ip: '192.168.30.10'
-    config.vm.synced_folder './www', '/var/www', :mount_options => ['dmode=777', 'fmode=666']
+    config.vm.hostname = 'drvysBox'
 
-    config.vm.provider 'virtualbox' do |vb|
-        vb.customize ['modifyvm', :id, '--memory',               '1024']
-        vb.customize ['modifyvm', :id, '--cpuexecutioncap',      '95']
-    end
-
+    config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
+    # Optional NFS. Make sure to remove the other synced_folder line.
+    #config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
 
     config.vm.provision :shell, path: 'bootstrap.sh'
 end
