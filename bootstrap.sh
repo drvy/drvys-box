@@ -181,7 +181,7 @@ sudo sed -ie 's/sendfile on;/sendfile off;/g' /etc/nginx/nginx.conf
 # ------------------------------------------
 # Install Composer
 # ------------------------------------------
-cd /usr/src
+cd /tmp
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 cd ~
 
