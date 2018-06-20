@@ -87,13 +87,15 @@ EOF
 
 # ------------------------------------------
 # Create WWW dir and give permissions
+# Also remove NGINX default folder.
 # ------------------------------------------
 sudo mkdir -p /var/www
-
 sudo adduser vagrant www-data
 sudo chown vagrant:www-data -R /var/www
 sudo chmod 0755 -R /var/www
 sudo chmod g+s -R /var/www
+
+sudo rm -rf /var/www/html
 
 
 # ------------------------------------------
