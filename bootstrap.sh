@@ -5,12 +5,11 @@ sudo apt-get -y update
 sudo apt-get -y dist-upgrade
 
 # ------------------------------------------
-# DEBCONF Config for MySQL and Sources List
+# Default config for MySQL server
 # ------------------------------------------
-
-# Set root's password for mysql to 'toor'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password toor'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password toor'
+
 
 # ------------------------------------------
 # Install Packages.
@@ -84,6 +83,7 @@ location ~ \.php$ {
     include fastcgi_params;
 }
 EOF
+
 
 # ------------------------------------------
 # Create WWW dir and give permissions
@@ -165,8 +165,9 @@ sudo sed -ie 's/;listen.owner = www-data/listen.owner = www-data/g' /etc/php/7.0
 sudo sed -ie 's/;listen.group = www-data/listen.group = www-data/g' /etc/php/7.0/fpm/pool.d/www.conf
 sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.0/fpm/pool.d/www.conf
 
+
 # ------------------------------------------
-# Set PHP Ini.
+# Set PHP INI.
 # ------------------------------------------
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.ini.bak
 sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/php/7.0/fpm/php.ini
@@ -187,6 +188,13 @@ cd /tmp
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 cd ~
 
+
+# ------------------------------------------
+# BASH (.bashrc) Enhancement
+# ------------------------------------------
+
+# Force Colour.
+sed -ie 's/#force_color_prompt=/force_color_prompt=/g' ~/.bashrc
 
 
 # ------------------------------------------
