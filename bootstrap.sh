@@ -16,16 +16,10 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 # Install Packages.
 # ------------------------------------------
 
-# Curl
+# Curl, PHP, MySQL, Nginx
 sudo apt-get -y install curl
-
-# PHP
-sudo apt-get -y install php-cli php-curl php-dev php-zip php-fpm php-gd php-xml php-mysql php-mbstring php-opcache php-json php-sqlite3 php-xdebug
-
-# MariaDB (MySql)
+sudo apt-get -y install php-cli php-fpm php-curl php-dev php-zip php-gd php-xml php-mysql php-mbstring php-opcache php-json php-sqlite3 php-xdebug
 sudo apt-get -y install mysql-server mysql-client
-
-# nGinx
 sudo apt-get -y install nginx
 
 # Github Pages
@@ -171,8 +165,6 @@ sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.0/fpm/pool.
 
 # ------------------------------------------
 # Set PHP Ini.
-# Turn on the display errors and set max
-# POST and uploads size.
 # ------------------------------------------
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.ini.bak
 sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/php/7.0/fpm/php.ini
@@ -192,6 +184,7 @@ sudo sed -ie 's/sendfile on;/sendfile off;/g' /etc/nginx/nginx.conf
 cd /usr/src
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 cd ~
+
 
 
 # ------------------------------------------
