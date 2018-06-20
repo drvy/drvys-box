@@ -16,7 +16,7 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 # Install Packages.
 # ------------------------------------------
 
-# Curl, PHP, MySQL, Nginx
+# Curl, PHP, MySQL, NGINX
 sudo apt-get -y install curl
 sudo apt-get -y install php-cli php-fpm php-curl php-dev php-zip php-gd php-xml php-mysql php-mbstring php-opcache php-json php-sqlite3 php-xdebug
 sudo apt-get -y install mysql-server mysql-client
@@ -35,7 +35,7 @@ sudo openssl req -nodes -new -x509 -subj "/C=ES/ST=NA/L=NA/O=dMDev/OU=DevOps/CN=
 
 
 # ------------------------------------------
-# Configure the default Nginx site
+# Configure the default NGINX site
 # ------------------------------------------
 sudo rm /etc/nginx/sites-available/default
 sudo touch /etc/nginx/sites-available/default
@@ -125,7 +125,7 @@ cat > /var/www/index.php <<'EOF'
         a, a:visited { color: #069; padding: 2px; text-decoration: none; border-bottom: 1px dashed #ccc;}
         a:hover, a:active { color: #111; text-decoration: none; border-bottom: 1px solid #111; }
         code { background: #fff; padding: 1px; }
-        .hearth { color: #A93232; }
+        .heart { color: #A93232; }
     </style>
 </head>
 <body>
@@ -145,7 +145,7 @@ cat > /var/www/index.php <<'EOF'
         <p>Read the included <code>README.md</code> for documentation.</p>
         <small>
             Version 4.0 |
-            Made with by <span class='hearth'>&#10084;</span>
+            Made with by <span class='heart'>&#10084;</span>
             <a href='https://github.com/drvy' target='_blank'>Dragomir Yordanov</a>
         </small>
     </div>
