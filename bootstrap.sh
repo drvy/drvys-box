@@ -171,17 +171,19 @@ sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.0/fpm/pool.
 
 # ------------------------------------------
 # Set PHP Ini.
+# Turn on the display errors and set max
+# POST and uploads size.
 # ------------------------------------------
-
 sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.ini.bak
-sudo sed -ie 's/sendfile on;/sendfile off;/g' /etc/php/7.0/fpm/php.ini
+sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/php/7.0/fpm/php.ini
+
 
 # ------------------------------------------
 # Virtualbox & Vagrant bug related to sendFile.
 # https://github.com/mitchellh/vagrant/issues/351#issuecomment-1339640
 # ------------------------------------------
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
-sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/nginx/nginx.conf
+sudo sed -ie 's/sendfile on;/sendfile off;/g' /etc/nginx/nginx.conf
 
 
 # ------------------------------------------
