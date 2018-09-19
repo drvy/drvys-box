@@ -200,6 +200,6 @@ sed -ie 's/#force_color_prompt=/force_color_prompt=/g' ~/.bashrc
 # ------------------------------------------
 # Restart services
 # ------------------------------------------
-sudo service php7.0-fpm restart
+sudo service php restart
 sudo service nginx restart
 sudo service mysql restart
