@@ -17,7 +17,7 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 
 # Curl, PHP, MySQL, NGINX
 sudo apt-get -y install curl
-sudo apt-get -y install php-cli php-fpm php-curl php-dev php-zip php-gd php-xml php-mysql php-mbstring php-opcache php-json php-sqlite3 php-xdebug
+sudo apt-get -y install php-cli php-fpm php-curl php-dev php-zip php-gd php-xml php-mysql php-mbstring php-json php-sqlite3 php-xdebug
 sudo apt-get -y install mysql-server mysql-client
 sudo apt-get -y install nginx
 
