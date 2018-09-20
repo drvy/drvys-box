@@ -17,12 +17,12 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 
 # Curl, PHP, MySQL, NGINX
 sudo apt-get -y install curl
-sudo apt-get -y install php-cli php-fpm php-curl php-dev php-zip php-gd php-xml php-mysql php-mbstring php-opcache php-json php-sqlite3 php-xdebug
+sudo apt-get -y install php-cli php-fpm php-curl php-dev php-zip php-gd php-xml php-mysql php-mbstring php-json php-sqlite3 php-xdebug
 sudo apt-get -y install mysql-server mysql-client
 sudo apt-get -y install nginx
 
 # Github Pages
-sudo apt-get -y install ruby ruby-dev jekyll
+sudo apt-get -y install ruby ruby-dev jekyll zlib1g-dev
 sudo gem install jekyll-paginate jekyll-sitemap jekyll-gist github-pages
 
 
@@ -75,12 +75,8 @@ location ~ /\.ht { deny all; }
 location = /favicon.ico { log_not_found off; access_log off; }
 
 location ~ \.php$ {
-    try_files $uri = 404;
-    fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    fastcgi_index index.php;
-    include fastcgi_params;
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/run/php/php7.2-fpm.sock;
 }
 EOF
 
@@ -146,8 +142,8 @@ cat > /var/www/index.php <<'EOF'
         <p>You can now start running and developing your projects.</p>
         <p>Read the included <code>README.md</code> for documentation.</p>
         <small>
-            Version 4.0 |
-            Made with by <span class='heart'>&#10084;</span>
+            Version 4.1 |
+            Made with <span class='heart'>&#10084;</span> by
             <a href='https://github.com/drvy' target='_blank'>Dragomir Yordanov</a>
         </small>
     </div>
@@ -159,18 +155,18 @@ EOF
 # ------------------------------------------
 # Configure PHP-FPM to use local socket.
 # ------------------------------------------
-sudo cp /etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/www.conf.bak
-sudo sed -ie 's/listen = 127.0.0.1:9000/listen = \/run\/php7.0-fpm.sock/g' /etc/php/7.0/fpm/pool.d/www.conf
-sudo sed -ie 's/;listen.owner = www-data/listen.owner = www-data/g' /etc/php/7.0/fpm/pool.d/www.conf
-sudo sed -ie 's/;listen.group = www-data/listen.group = www-data/g' /etc/php/7.0/fpm/pool.d/www.conf
-sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.0/fpm/pool.d/www.conf
+sudo cp /etc/php/7.2/fpm/pool.d/www.conf /etc/php/7.2/fpm/pool.d/www.conf.bak
+sudo sed -ie 's/listen = 127.0.0.1:9000/listen = \/run\/php7.2-fpm.sock/g' /etc/php/7.2/fpm/pool.d/www.conf
+sudo sed -ie 's/;listen.owner = www-data/listen.owner = www-data/g' /etc/php/7.2/fpm/pool.d/www.conf
+sudo sed -ie 's/;listen.group = www-data/listen.group = www-data/g' /etc/php/7.2/fpm/pool.d/www.conf
+sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.2/fpm/pool.d/www.conf
 
 
 # ------------------------------------------
 # Set PHP INI.
 # ------------------------------------------
-sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.ini.bak
-sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/php/7.0/fpm/php.ini
+sudo cp /etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini.bak
+sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/php/7.2/fpm/php.ini
 
 
 # ------------------------------------------
@@ -190,16 +186,15 @@ cd ~
 
 
 # ------------------------------------------
+# Restart services
+# ------------------------------------------
+sudo service php7.2-fpm restart
+sudo service nginx restart
+sudo service mysql restart
+
+# ------------------------------------------
 # BASH (.bashrc) Enhancement
 # ------------------------------------------
 
 # Force Colour.
 sed -ie 's/#force_color_prompt=/force_color_prompt=/g' ~/.bashrc
-
-
-# ------------------------------------------
-# Restart services
-# ------------------------------------------
-sudo service php7.0-fpm restart
-sudo service nginx restart
-sudo service mysql restart
