@@ -75,12 +75,8 @@ location ~ /\.ht { deny all; }
 location = /favicon.ico { log_not_found off; access_log off; }
 
 location ~ \.php$ {
-    try_files $uri = 404;
-    fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    fastcgi_index index.php;
-    include fastcgi_params;
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/run/php/php7.2-fpm.sock;
 }
 EOF
 
@@ -159,18 +155,18 @@ EOF
 # ------------------------------------------
 # Configure PHP-FPM to use local socket.
 # ------------------------------------------
-sudo cp /etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/www.conf.bak
-sudo sed -ie 's/listen = 127.0.0.1:9000/listen = \/run\/php7.0-fpm.sock/g' /etc/php/7.0/fpm/pool.d/www.conf
-sudo sed -ie 's/;listen.owner = www-data/listen.owner = www-data/g' /etc/php/7.0/fpm/pool.d/www.conf
-sudo sed -ie 's/;listen.group = www-data/listen.group = www-data/g' /etc/php/7.0/fpm/pool.d/www.conf
-sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.0/fpm/pool.d/www.conf
+sudo cp /etc/php/7.2/fpm/pool.d/www.conf /etc/php/7.2/fpm/pool.d/www.conf.bak
+sudo sed -ie 's/listen = 127.0.0.1:9000/listen = \/run\/php7.0-fpm.sock/g' /etc/php/7.2/fpm/pool.d/www.conf
+sudo sed -ie 's/;listen.owner = www-data/listen.owner = www-data/g' /etc/php/7.2/fpm/pool.d/www.conf
+sudo sed -ie 's/;listen.group = www-data/listen.group = www-data/g' /etc/php/7.2/fpm/pool.d/www.conf
+sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.2/fpm/pool.d/www.conf
 
 
 # ------------------------------------------
 # Set PHP INI.
 # ------------------------------------------
-sudo cp /etc/php/7.0/fpm/php.ini /etc/php/7.0/fpm/php.ini.bak
-sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/php/7.0/fpm/php.ini
+sudo cp /etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini.bak
+sudo sed -ie 's/display_errors = Off/display_errors = On/g' /etc/php/7.2/fpm/php.ini
 
 
 # ------------------------------------------
