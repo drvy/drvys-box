@@ -143,7 +143,7 @@ cat > /var/www/index.php <<'EOF'
         <p>Read the included <code>README.md</code> for documentation.</p>
         <small>
             Version 4.1 |
-            Made with by <span class='heart'>&#10084;</span>
+            Made with <span class='heart'>&#10084;</span> by
             <a href='https://github.com/drvy' target='_blank'>Dragomir Yordanov</a>
         </small>
     </div>
