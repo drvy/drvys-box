@@ -22,7 +22,7 @@ sudo apt-get -y install mysql-server mysql-client
 sudo apt-get -y install nginx
 
 # Github Pages
-sudo apt-get -y install ruby ruby-dev jekyll
+sudo apt-get -y install ruby ruby-dev jekyll zlib1g-dev
 sudo gem install jekyll-paginate jekyll-sitemap jekyll-gist github-pages
 
 
