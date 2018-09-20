@@ -1,7 +1,7 @@
-# Xenial (16.04), NGINX, PHP7, MySQL, Jekyll and Composer
+# Bionic (18.04), NGINX, PHP 7.2, MySQL, Jekyll and Composer
 
 ## Introduction
-Basic Vagrant Setup with a bootstrap script for a LEMP (NGINX, PHP7, MySQL) stack, Jekyll, Ruby and Composer. Makes use of the 64 bit version of Ubuntu Xenial (16.04) box provided by Vagrant itself. Automates the setup and initial configuration of the packages.
+Basic Vagrant Setup with a bootstrap script for a LEMP (NGINX, PHP7, MySQL) stack, Jekyll, Ruby and Composer. Makes use of the 64 bit version of Ubuntu Bionic (18.04) box provided by Vagrant itself. Automates the setup and initial configuration of the packages.
 
 Its a custom machine I use in my projects.
 
@@ -15,14 +15,14 @@ Its a custom machine I use in my projects.
 * Ubuntu Xenial 16.04 (`ubuntu/xenial64`)
 * MySQL (`mysql-server mysql-client`)
 * Nginx (`nginx`)
-* PHP 7 (`php7.0-fpm`)
+* PHP 7.2 (`php7.2-fpm`)
 * Ruby 2.1 (`ruby ruby-dev`)
 * github-pages (`github-pages bundler jekyll-paginate`)
 * Jekyll (_provided with github-pages_)
 * Composer (_lastest version on provision_).
 
 __PHP Extensions__:
-`php-cli php-curl php-dev php-zip php-fpm php-gd php-xml php-mysql php-mbstring php-opcache php-json php-sqlite3 php-xdebug`
+`php-cli php-curl php-dev php-zip php-fpm php-gd php-xml php-mysql php-mbstring php-json php-sqlite3 php-xdebug`
 
 __Other Packages__:
 `curl`
@@ -115,6 +115,7 @@ more about them, just check the official Vagrant documentation.
 |:------------:|--------------------------------------------:|
 | First Start  | `vagrant up --provision`                    |
 | Normal Start | `vagrant up`                                |
+| Update Box   | `vagrant box update`
 | Suspend      | `vagrant suspend`                           |
 | Resume       | `vagrant resume`                            |
 | Shutdown     | `vagrant halt`                              |
