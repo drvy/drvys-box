@@ -6,3 +6,4 @@ VagrantBK
 .ruby-version
 www/*
 !www/README.md
+*.log
