@@ -142,7 +142,7 @@ cat > /var/www/index.php <<'EOF'
         <p>You can now start running and developing your projects.</p>
         <p>Read the included <code>README.md</code> for documentation.</p>
         <small>
-            Version 4.0 |
+            Version 4.1 |
             Made with by <span class='heart'>&#10084;</span>
             <a href='https://github.com/drvy' target='_blank'>Dragomir Yordanov</a>
         </small>
@@ -156,7 +156,7 @@ EOF
 # Configure PHP-FPM to use local socket.
 # ------------------------------------------
 sudo cp /etc/php/7.2/fpm/pool.d/www.conf /etc/php/7.2/fpm/pool.d/www.conf.bak
-sudo sed -ie 's/listen = 127.0.0.1:9000/listen = \/run\/php7.0-fpm.sock/g' /etc/php/7.2/fpm/pool.d/www.conf
+sudo sed -ie 's/listen = 127.0.0.1:9000/listen = \/run\/php7.2-fpm.sock/g' /etc/php/7.2/fpm/pool.d/www.conf
 sudo sed -ie 's/;listen.owner = www-data/listen.owner = www-data/g' /etc/php/7.2/fpm/pool.d/www.conf
 sudo sed -ie 's/;listen.group = www-data/listen.group = www-data/g' /etc/php/7.2/fpm/pool.d/www.conf
 sudo sed -ie 's/;listen.mode = 0660/listen.mode = 0660/g' /etc/php/7.2/fpm/pool.d/www.conf
@@ -186,16 +186,15 @@ cd ~
 
 
 # ------------------------------------------
-# BASH (.bashrc) Enhancement
-# ------------------------------------------
-
-# Force Colour.
-sed -ie 's/#force_color_prompt=/force_color_prompt=/g' ~/.bashrc
-
-
-# ------------------------------------------
 # Restart services
 # ------------------------------------------
 sudo service php7.2-fpm restart
 sudo service nginx restart
 sudo service mysql restart
+
+# ------------------------------------------
+# BASH (.bashrc) Enhancement
+# ------------------------------------------
+
+# Force Colour.
+sed -ie 's/#force_color_prompt=/force_color_prompt=/g' ~/.bashrc
